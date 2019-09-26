@@ -54,6 +54,7 @@ void user_input(){
     }
     // Prints text from map file
     cout << all_text_from_map_file << endl;
+
   }
   // ----------------- Random Assignment ----------------------
   else{
