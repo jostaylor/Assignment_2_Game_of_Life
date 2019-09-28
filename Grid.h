@@ -8,6 +8,7 @@ public:
   Grid(int numRows, int numColumns, double populationDensity); // overload constructor
   ~Grid(); // destructor
   void printGrid();
+  int checkGrid();
 
   int length;
   int height;

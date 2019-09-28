@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Grid.h"
+#include "Classic.h"
 
 using namespace std;
 
@@ -87,5 +88,13 @@ void user_input(){
     // Creates grid with inputted values
     Grid* g1 = new Grid(input_numRows, input_numColumns, input_populationDensity);
     g1->printGrid();
+
+    //search through array and find whether or not the array is open or filled
+    int checked = 0;
+    checked = g1->checkGrid();
+    cout << "There are: " << checked << " cells on the board." << endl;
+    cout << "\n" << endl;
+    Classic* c = new Classic(g1);
+    c->printGrid();
   }
 }

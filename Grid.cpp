@@ -60,3 +60,19 @@ void Grid::printGrid(){
     cout << "\n";
   }
 }
+
+int Grid::checkGrid()
+{
+  int isFilled = 0;
+  for(int i = 0; i < length; ++i)
+  {
+    for(int j = 0; j < height; ++j)
+    {
+      if(myGrid[i][j] == 'X')
+      {
+        isFilled +=1;
+      }
+    }
+  }
+  return isFilled;
+}
