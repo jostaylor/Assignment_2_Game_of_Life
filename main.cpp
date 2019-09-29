@@ -19,7 +19,9 @@ int main(int argc, char const *argv[])
   testGrid->printGrid();
   //g->gameMode = "Donut"; // sets mode to donut
   GameRules gr;
-  gr.generateNextGrid(testGrid);
+  //use the grid created by the user
+  gr.generateNextGrid(g);
+  //gr.generateNextGrid(testGrid);
 
   return 0;
 }

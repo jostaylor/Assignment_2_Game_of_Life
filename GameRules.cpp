@@ -37,17 +37,20 @@ Grid* GameRules::generateNextGrid(Grid* g){
       amount_of_neighbors += g->getValue(i+1, j-1);
       // Implements Game of Life Rules to determine the cell's state in next generation
       // here
-      //cout << "Amount of neighbors: " << amount_of_neighbors << endl;
+
+      cout << "Amount of neighbors: " << amount_of_neighbors << endl;
       if(amount_of_neighbors < 2)
       {
+        cout << "empty" << endl;
         //should be empty next generation
         g2->myGrid[i][j] = '-';
         //code
       }
       else if(amount_of_neighbors == 2)
       {
+        cout << "stable" << endl;
         //if empty stay empty
-        if(current_cell = '-')
+        if(current_cell == '-')
         {
           g2->myGrid[i][j] = '-';
         }
@@ -59,17 +62,19 @@ Grid* GameRules::generateNextGrid(Grid* g){
       }
       else if(amount_of_neighbors == 3)
       {
+        cout << "New Cell" << endl;
         //cell stays and if empty cell is made
         g2->myGrid[i][j] = 'X';
       }
       else
       {
+        cout << "Death" << endl;
         //if 4 or more neighbors then cell dies or space will remain empty
         g2->myGrid[i][j] = '-';
       }
     }
   }
-  cout << "updated grid" << endl;
+  cout << "updated new grid" << endl;
   g2->printGrid();
   // test work. not sure if we will need to keep these x and y variables
   x = g->length;
