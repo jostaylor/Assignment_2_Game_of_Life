@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 
 using namespace std;
@@ -14,3 +15,4 @@ public:
 
   char** myGrid;
 };
+*/

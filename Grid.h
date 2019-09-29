@@ -1,4 +1,6 @@
 #include <iostream>
+#ifndef GRID_H
+#define GRID_H
 
 using namespace std;
 
@@ -9,9 +11,13 @@ public:
   ~Grid(); // destructor
   void printGrid();
   int checkGrid();
+  int getValue(int x, int y); // returns 0 if dash or 1 if X
 
-  int length;
-  int height;
+  string outputMode; // either Pause, Enter, or File
+  string gameMode; // either Classic, Donut, or Mirror
+  int length; // length of grid
+  int height; // height of grid
   double popDensity;
   char** myGrid;
 };
+#endif

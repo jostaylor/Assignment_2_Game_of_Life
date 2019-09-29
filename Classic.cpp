@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include "Classic.h"
 
@@ -27,6 +28,10 @@ Classic::Classic(Grid g)
   }
 }
 
+Classic::~Classic(){
+  delete []myGrid;
+}
+
 void printGrid()
 {
   for (int i = 0; i < myGrid.length; ++i){
@@ -37,6 +42,6 @@ void printGrid()
   }
 }
 
-
+*/
 
 //int checkLocation();

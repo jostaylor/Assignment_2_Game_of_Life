@@ -4,9 +4,10 @@
 using namespace std;
 
 Grid::Grid(){
-  // declares default length and height - 10
+  // declares default length and height - 10 (and other variables)
   length = 10;
   height = 10;
+  gameMode = "Classic";
   // creates an array of arrays on the heap
   myGrid = new char*[length];
   for (int i = 0; i < length; ++i){
@@ -19,9 +20,11 @@ Grid::Grid(){
 }
 
 Grid::Grid(int numRows, int numColumns, double populationDensity){
-  // declares default length and height - 10
+  // declares variables
   length = numRows;
   height = numColumns;
+  gameMode = "Classic";
+  outputMode = "Pause";
   popDensity = populationDensity;
   // creates an array of arrays on the heap
   myGrid = new char*[length];
@@ -61,6 +64,7 @@ void Grid::printGrid(){
   }
 }
 
+// -------------- do we need this? -------------------
 int Grid::checkGrid()
 {
   int isFilled = 0;
@@ -75,4 +79,41 @@ int Grid::checkGrid()
     }
   }
   return isFilled;
+}
+// ---------------------^^^^^^--------------------------
+
+// returns 0 if dash and 1 if X
+// contatins conditionals for each MODE
+int Grid::getValue(int x, int y){
+  // -------------------------Classic Mode-------------------------------
+  if (gameMode == "Classic"){
+    if (x == -1 || x >= length || y == -1 || y >= height){ // if coordinate is outside grid
+      return 0;
+    }
+    // Returns numerical value for char
+    else{
+      if (myGrid[x][y] == 'X'){
+        return 1;
+      }
+      else if (myGrid[x][y] == '-'){
+        return 0;
+      }
+      else{
+        cout << "slot has invalid char" << endl;
+      }
+    }
+  }
+  // -----------------------------Mirror Mode------------------------------
+  else if (gameMode == "Mirror"){
+    cout << gameMode << endl;
+    return 69;
+  }
+  // -----------------------------Donut Mode------------------------------
+  else if (gameMode == "Donut"){
+    cout << gameMode << endl;
+    return 69;
+  }
+  else{
+    cout << "whoops, mode incorrect" << endl;
+  }
 }
