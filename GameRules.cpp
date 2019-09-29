@@ -30,6 +30,35 @@ Grid* GameRules::generateNextGrid(Grid* g){
       amount_of_neighbors += g->getValue(i+1, j-1);
       // Implements Game of Life Rules to determine the cell's state in next generation
       // here
+      if(amount_of_neighbors < 2)
+      {
+        //should be empty next generation
+        current_cell = '-';
+        //code
+      }
+      else if(neighbors == 2)
+      {
+        //if empty stay empty
+        if(current_cell = '-')
+        {
+          current_cell = '-';
+        }
+        else
+        {
+          current_cell = 'X';
+        }
+        //if filled stay filled
+      }
+      else if(cell == 3)
+      {
+        //cell stays and if empty cell is made
+        current_cell = 'X';
+      }
+      else
+      {
+        //if 4 or more neighbors then cell dies or space will remain empty
+        current_cell = '-';
+      }
     }
   }
 
