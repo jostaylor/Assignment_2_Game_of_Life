@@ -8,6 +8,8 @@ using namespace std;
 
 Grid* user_input();
 void user_input_2(Grid* g1);
+// void clearScreen();
+void multipleGenerations(GameRules gr, Grid* g);
 
 int main(int argc, char const *argv[])
 {
@@ -20,7 +22,9 @@ int main(int argc, char const *argv[])
   //g->gameMode = "Donut"; // sets mode to donut
   GameRules gr;
   //use the grid created by the user
-  gr.generateNextGrid(g);
+  multipleGenerations(gr, g);
+  // gr.generateNextGrid(g);
+  // clearScreen();
   //gr.generateNextGrid(testGrid);
 
   return 0;
@@ -166,5 +170,44 @@ void user_input_2(Grid* g1){
   else{
     cout << "Something went wrong. Please try again." << endl;
     exit(1);
+  }
+}
+// ------------------ Clear screen method --------------------------------
+void static clearScreen()
+{
+  for(int i = 0; i < 10; ++i)
+  {
+    cout << "\n\n\n\n\n\n\n\n\n\n";
+  }
+  //add space between generations
+  cout << "----------" << endl;
+}
+// ------------------- Runs Multiple Generations --------------------------
+void multipleGenerations(GameRules gr, Grid* g)
+{
+  string user = g->outputMode;
+  // while(user != "Pause" || user != "Enter" || user != "File")
+  // {
+  //   gr.generateNextGrid(g);
+  //   clearScreen();
+  // }
+  //Don't need an if statement for pause because the while loop will just stop running so it will be paused
+  //This is to do the "Enter" key.
+  if(user == "Enter")
+  {
+    Grid* newG = gr.generateNextGrid(g);
+    while(user == "Enter")
+    {
+      char answer;
+      Grid* newG = gr.generateNextGrid(newG);
+      cout << "Press Enter to continue." << endl;
+      user == "Hold";
+      cin >> answer;
+      if(cin.get() == '\n')
+      {
+        user == "Enter";
+        clearScreen();
+      }
+    }
   }
 }

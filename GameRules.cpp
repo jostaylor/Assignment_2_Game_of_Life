@@ -15,8 +15,8 @@ Grid* GameRules::generateNextGrid(Grid* g){
   g->myGrid[1][0] = 'X';
   cout << "Original grid being printed" << endl;
   g -> printGrid();
-  cout<< "New Grid being printed" << endl;
-  g2->printGrid();
+  // cout<< "New Grid being printed" << endl;
+  // g2->printGrid();
   // declare variables
   char current_cell;
   int amount_of_neighbors;
@@ -38,17 +38,17 @@ Grid* GameRules::generateNextGrid(Grid* g){
       // Implements Game of Life Rules to determine the cell's state in next generation
       // here
 
-      cout << "Amount of neighbors: " << amount_of_neighbors << endl;
+      //cout << "Amount of neighbors: " << amount_of_neighbors << endl;
       if(amount_of_neighbors < 2)
       {
-        cout << "empty" << endl;
+        //cout << "empty" << endl;
         //should be empty next generation
         g2->myGrid[i][j] = '-';
         //code
       }
       else if(amount_of_neighbors == 2)
       {
-        cout << "stable" << endl;
+        //cout << "stable" << endl;
         //if empty stay empty
         if(current_cell == '-')
         {
@@ -62,13 +62,13 @@ Grid* GameRules::generateNextGrid(Grid* g){
       }
       else if(amount_of_neighbors == 3)
       {
-        cout << "New Cell" << endl;
+        //cout << "New Cell" << endl;
         //cell stays and if empty cell is made
         g2->myGrid[i][j] = 'X';
       }
       else
       {
-        cout << "Death" << endl;
+        // cout << "Death" << endl;
         //if 4 or more neighbors then cell dies or space will remain empty
         g2->myGrid[i][j] = '-';
       }
@@ -82,7 +82,7 @@ Grid* GameRules::generateNextGrid(Grid* g){
   cout << x << endl;
   cout << y << endl;
   cout << g->getValue(x, y) << endl;
-  return g;
+  return g2;
 }
 
 GameRules::GameRules(){
