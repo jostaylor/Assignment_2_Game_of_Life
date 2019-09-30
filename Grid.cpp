@@ -105,13 +105,55 @@ int Grid::getValue(int x, int y){
   }
   // -----------------------------Mirror Mode------------------------------
   else if (gameMode == "Mirror"){
-    cout << gameMode << endl;
-    return 69;
+    // Sets x and/or y to its reflection if the search is outside of the grid
+    if (x == -1){
+      x++;
+    }
+    if (x == length){
+      x--;
+    }
+    if (y == -1){
+      y++;
+    }
+    if (y == height){
+      y--;
+    }
+    // Returns numerical value for char
+    if (myGrid[x][y] == 'X'){
+      return 1;
+    }
+    else if (myGrid[x][y] == '-'){
+      return 0;
+    }
+    else{
+      cout << "slot has invalid char" << endl;
+    }
   }
   // -----------------------------Donut Mode------------------------------
   else if (gameMode == "Donut"){
-    cout << gameMode << endl;
-    return 69;
+    // Wraps x or y around the grid if the search exists outside the grid
+    if (x == -1){
+      x = length-1;
+    }
+    if (x == length){
+      x = 0;
+    }
+    if (y == -1){
+      y = height-1;
+    }
+    if (y == height){
+      y = 0;
+    }
+    // Returns numerical value for char
+    if (myGrid[x][y] == 'X'){
+      return 1;
+    }
+    else if (myGrid[x][y] == '-'){
+      return 0;
+    }
+    else{
+      cout << "slot has invalid char" << endl;
+    }
   }
   else{
     cout << "whoops, mode incorrect" << endl;
