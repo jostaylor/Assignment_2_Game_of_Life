@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <unistd.h>
 #include "Grid.h"
 #include "GameRules.h"
 // #include "Classic.h"
@@ -9,7 +11,7 @@ using namespace std;
 Grid* user_input();
 void user_input_2(Grid* g1);
 // void clearScreen();
-void multipleGenerations(GameRules gr, Grid* g);
+void multipleGenerations(GameRules gr, Grid* g, Grid* g1);
 
 int main(int argc, char const *argv[])
 {
@@ -17,12 +19,18 @@ int main(int argc, char const *argv[])
   Grid* g = user_input();
   user_input_2(g);
 
-  Grid* testGrid = new Grid(); // creates new grid on the heap
-  testGrid->printGrid();
+  g->myGrid[2][3] = 'X';
+  g->myGrid[2][2] = 'X';
+  g->myGrid[2][1] = 'X';
+  g->myGrid[2][0] = 'X';
+  g->myGrid[1][0] = 'X';
+  Grid* testGrid = new Grid(g->length, g->height, g->popDensity); // creates new grid on the heap
+  //testGrid->printGrid();
   //g->gameMode = "Donut"; // sets mode to donut
   GameRules gr;
   //use the grid created by the user
-  multipleGenerations(gr, g);
+  system("pause");
+  multipleGenerations(gr, g, testGrid);
   // gr.generateNextGrid(g);
   // clearScreen();
   //gr.generateNextGrid(testGrid);
@@ -243,7 +251,7 @@ void static clearScreen()
   cout << "----------" << endl;
 }
 // ------------------- Runs Multiple Generations --------------------------
-void multipleGenerations(GameRules gr, Grid* g)
+void multipleGenerations(GameRules gr, Grid* g, Grid* g1)
 {
   string user = g->outputMode;
   // while(user != "Pause" || user != "Enter" || user != "File")
@@ -255,19 +263,29 @@ void multipleGenerations(GameRules gr, Grid* g)
   //This is to do the "Enter" key.
   if(user == "Enter")
   {
-    Grid* newG = gr.generateNextGrid(g);
-    while(user == "Enter")
+    char end;
+    g1 = gr.generateNextGrid(g);
+    int counter = 0;
+    while(counter != 50)
     {
-      char answer;
-      Grid* newG = gr.generateNextGrid(newG);
-      cout << "Press Enter to continue." << endl;
-      user == "Hold";
-      cin >> answer;
-      if(cin.get() == '\n')
-      {
-        user == "Enter";
-        clearScreen();
-      }
+      //system("pause");
+      g1 = gr.generateNextGrid(g1);
+      cout << "Press enter to continue.... " << endl;
+      cin.get(end);
+      counter += 1;
     }
   }
+  else if(user == "Pause")
+  {
+    g1 = gr.generateNextGrid(g);
+    int counter = 0;
+    while(true)//counter != 50)
+    {
+      //system("pause");
+      g1 = gr.generateNextGrid(g1);
+      usleep(750000);
+      //counter += 1;
+    }
+  }
+
 }
