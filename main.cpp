@@ -70,15 +70,47 @@ Grid* user_input(){
       while (getline(text_file, line)){
         // first line in file
         if (line_count == 0){ // number of rows here ie length
-          grid_length = stoi(line); // this is the only way this works
+          // Checks to make sure the dimension is listed properly in the text file
+          try{
+            grid_length = stoi(line);
+          }
+          catch (const std::invalid_argument e){
+            cout << "Error reading dimensions of grid: " << line << endl;
+            cout << "Please fix and retry." << endl;
+            exit(1);
+          }
           line_count++;
           continue;
         }
         // second line in file
         if (line_count == 1){ // number of columns here ie height
-          grid_height = stoi(line); // this is the only we can typecast it
+          // Checks to make sure the dimension is listed properly in the text file
+          try{
+            grid_height = stoi(line);
+          }
+          catch (const std::invalid_argument e){
+            cout << "Error reading dimensions of grid: " << line << endl;
+            cout << "Please fix and retry." << endl;
+            exit(1);
+          }
           line_count++;
           continue;
+        }
+        // Iterates through a single line of the grid
+        for (int i = 0; i < line.size(); ++i){
+          // Checks to make sure every line is the corrct length (grid_height)
+          if (line.size()-1 != grid_height){
+            cout << "Map grid does not match dimensions listed. Please fix and try again." << endl;
+            exit(1);
+          }
+          // Checks to make sure only Xs and dashes exist in the grid
+          if (line[i] != '\r' && line[i] != '\n'){ // Makes sures it isn't falsely identifying inivisble characters
+            if (line[i] != 'X' && line[i] != '-'){ // If the grid contains something other than a dash or X
+              cout << "Invalid character in map file: " << line << endl;
+              cout << "Please ensure that there are only \'X\' and \'-\' characters in the grid, and then retry." << endl;
+              exit(1);
+            }
+          }
         }
         // Inserts each char from the txt file into the string variable grid_from_text_file
         grid_from_text_file = grid_from_text_file + line + "\n";
@@ -89,6 +121,11 @@ Grid* user_input(){
       // Handles error if file could not be read
       cout << "Could not open the file" << "\n";
       cout << "Usage \'./a.out [filename]\'" <<  endl;
+      exit(1);
+    }
+    // Checks to make sure there are the correct amount of lines (grid_length)
+    if (line_count-2 != grid_length){
+      cout << "Dimensions of map grid incorrect. Please fix and try again." << endl;
       exit(1);
     }
 

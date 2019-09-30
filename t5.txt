@@ -1,11 +1,11 @@
-1232
+11
 4
 ---X
 X--X
 -XX-
 X-X-
 -XXX
-X-X-
+XGX-
 -XXX
 X-X-
 ----
