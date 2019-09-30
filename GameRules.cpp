@@ -8,13 +8,13 @@ Grid* GameRules::generateNextGrid(Grid* g){
 
   // Creates second grid of same size
   Grid* g2 = new Grid(g->length, g->height, 0);
-  g->myGrid[2][3] = 'X';
-  g->myGrid[2][2] = 'X';
-  g->myGrid[2][1] = 'X';
-  g->myGrid[2][0] = 'X';
-  g->myGrid[1][0] = 'X';
-  cout << "Original grid being printed" << endl;
-  g -> printGrid();
+  // g->myGrid[2][3] = 'X';
+  // g->myGrid[2][2] = 'X';
+  // g->myGrid[2][1] = 'X';
+  // g->myGrid[2][0] = 'X';
+  // g->myGrid[1][0] = 'X';
+  // cout << "Original grid being printed" << endl;
+  // g -> printGrid();
   // cout<< "New Grid being printed" << endl;
   // g2->printGrid();
   // declare variables
@@ -74,14 +74,14 @@ Grid* GameRules::generateNextGrid(Grid* g){
       }
     }
   }
-  cout << "updated new grid" << endl;
+  //cout << "updated new grid" << endl;
   g2->printGrid();
   // test work. not sure if we will need to keep these x and y variables
   x = g->length;
   y = g->height;
-  cout << x << endl;
-  cout << y << endl;
-  cout << g->getValue(x, y) << endl;
+  //cout << x << endl;
+  //cout << y << endl;
+  //cout << g->getValue(x, y) << endl;
   return g2;
 }
 
