@@ -36,7 +36,6 @@ Grid* GameRules::generateNextGrid(Grid* g){
       amount_of_neighbors += g->getValue(i, j-1);
       amount_of_neighbors += g->getValue(i+1, j-1);
       // Implements Game of Life Rules to determine the cell's state in next generation
-      // here
 
       //cout << "Amount of neighbors: " << amount_of_neighbors << endl;
       if(amount_of_neighbors < 2)

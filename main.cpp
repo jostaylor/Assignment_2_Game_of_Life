@@ -50,13 +50,32 @@ Grid* user_input(){
     // Opens text file
     ifstream text_file;
     string line;
+    int grid_length = 1;
+    int grid_height = 1;
+    string grid_from_text_file = "";
+    int line_count = 0;
     text_file.open(file_name);
-    string all_text_from_map_file = "";
     // Iterates through every line in map file if it opens successfully
     if (text_file.is_open()){
       cout << "File opened successfully" << endl;
       while (getline(text_file, line)){
-        all_text_from_map_file += line + "\n";
+        if (line_count == 0){ // number of rows here ie length
+          grid_length = stoi(line); // this is the only way this works
+          line_count++;
+          continue;
+        }
+        if (line_count == 1){ // number of columns here ie height
+          grid_height = stoi(line); // this is the only we can typecast it
+          line_count++;
+          continue;
+        }
+        // Inserts each char from the txt file into the string variable grid_from_text_file
+        //for (int i = 0; i < line.size(); ++i){
+        grid_from_text_file = grid_from_text_file + line + "\n";
+        cout << line << endl;
+        //}
+        cout << line_count << endl;
+        line_count++;
       }
     }
     else{
@@ -65,12 +84,53 @@ Grid* user_input(){
       cout << "Usage \'./a.out [filename]\'" <<  endl;
       exit(1);
     }
-    // Prints text from map file
-    cout << all_text_from_map_file << endl;
+
+    // Transfers chars from string variable into the grid object
+    cout << grid_length << "___" << grid_height << endl;
+    cout << grid_from_text_file << endl;
+
+    Grid* g1 = new Grid(grid_length, grid_height, 0);
+
+    cout << grid_length << endl;
+    cout << grid_height << endl;
+
+    int string_index = 0;
+    for (int i = 0; i < grid_length; ++i){
+      for (int j = 0; j < grid_height; ++j){
+        if (grid_from_text_file[string_index] != '\n' && grid_from_text_file[string_index] != '\r'){
+          g1->myGrid[i][j] = grid_from_text_file[string_index];
+          cout << grid_from_text_file[string_index] << endl;
+          string_index++;
+        }
+        else{
+          string_index++;
+          j--;
+        }
+      }
+    }
+    /*
+    int row_index = 0;
+    for (int i = 0; i < grid_from_text_file.size(); ++i){
+      if (grid_from_text_file[i] != '\r'){ // Gets rid of the carraige return bs
+        cout << (i%grid_length) << endl;
+        cout << (i%grid_height) << endl;
+        cout << grid_from_text_file[i] << endl;
+        g1->myGrid[row_index][i%grid_height] = grid_from_text_file[i];
+      }
+      else{ // when there is a carraige return --> increase row index
+        row_index++;
+      }
+    }
+    */
+    /*
+    for (int i = 0; i < line.size(); ++i){
+      if (line[i] != '\r') // Gets rid of the carraige return bs from the txt file
+        g1->myGrid[line_count - 2][i] = line[i];
+    }
+    */
 
     // Process file
-    // here
-    Grid* g1 = new Grid();
+    g1->printGrid();
     return g1;
   }
   // ----------------- Random Assignment ----------------------
