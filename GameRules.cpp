@@ -81,6 +81,9 @@ Grid* GameRules::generateNextGrid(Grid* g){
   //cout << x << endl;
   //cout << y << endl;
   //cout << g->getValue(x, y) << endl;
+
+  // Compare grids here for infinite
+
   return g2;
 }
 
