@@ -63,23 +63,29 @@ Grid* GameRules::generateNextGrid(Grid* g, string mode){
 
 bool GameRules::compare(Grid* first, Grid* second)
 {
+  //to see how many similarties there are
   int similarities = 0;
+  //total number of possible similarities
   int total = first->length * first->height;
+  //only need to use one of their heights and lengths since they are the same
   for(int i = 0; i < first->length; ++i)
   {
     for(int j = 0; j < first->height; ++j)
     {
+      //if the same spots on the grid share the same value then increment similarties
       if(first->myGrid[i][j] == second->myGrid[i][j])
       {
         similarities++;
       }
     }
   }
+  //if similarties are equal to the total possible then the grids are the same and the program should stop
   if(similarities == total)
   {
     return true;
   }
   else
+  //else continue but keep checking
   {
     return false;
   }
