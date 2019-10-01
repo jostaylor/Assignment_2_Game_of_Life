@@ -257,7 +257,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     cout << "0" << endl;
     g->printGrid();
     cout << "1" << endl;
-    g1 = gr.generateNextGrid(g, mode);
+    g1 = gr.generateNextGrid(g, mode, user);
     //grab char so it runs within the loop properly
     cin.get(end);
     //create counter at 2 to properly label generations
@@ -268,7 +268,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       compareGrid = g1;
       // Print generation count and compute next generation
       cout << counter << endl;
-      g1 = gr.generateNextGrid(g1, mode);
+      g1 = gr.generateNextGrid(g1, mode, user);
       //after at least 10 itterations, compare the previous grid to the current
       //grid to check if they are identical and the program should stop running
       if(counter > 10)
@@ -289,7 +289,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     cout << "0" << endl;
     g->printGrid();
     cout << "1" << endl;
-    g1 = gr.generateNextGrid(g, mode);
+    g1 = gr.generateNextGrid(g, mode, user);
     //set counter to 2 to label generations properly
     int counter = 2;
     //let program run until the previous and current grid are equal
@@ -299,7 +299,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       compareGrid = g1;
       // Print and generate next grid
       cout << counter << endl;
-      g1 = gr.generateNextGrid(g1, mode);
+      g1 = gr.generateNextGrid(g1, mode, user);
       if(counter > 10)
       {
         //check if previous and current grid are identical
@@ -324,8 +324,6 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     output_text_file.open(output_file_name);
     //print original grid to file and console
     output_text_file << "0" << endl;
-    cout << "0" << endl;
-    g->printGrid();
     for (int i = 0; i < g->length; ++i)
     {
       for (int j = 0; j < g->height; ++j)
@@ -336,8 +334,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     }
     // Print first generation to console and output fun
     output_text_file << "1" << endl;
-    cout << "1" << endl;
-    g1 = gr.generateNextGrid(g, mode);
+    g1 = gr.generateNextGrid(g, mode, user);
     for (int i = 0; i < g1->length; ++i)
     {
       for (int j = 0; j < g1->height; ++j)
@@ -348,13 +345,12 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     }
     // Sets counter to 2 accordingly and runs multiple generation loop
     int counter = 2;
-    while(areEqual != true)
+    while(counter < 2000 && areEqual != true)
     {
       //same thing as others but this time printing to output file instead of terminal
       compareGrid = g1;
       output_text_file << counter << endl;
-      cout << counter << endl;
-      g1 = gr.generateNextGrid(g1, mode);
+      g1 = gr.generateNextGrid(g1, mode, user);
       for (int i = 0; i < g1->length; ++i)
       {
         for (int j = 0; j < g1->height; ++j)
@@ -370,6 +366,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       counter++;
     }
     //close file
+    cout << "Grid Succesfully outputted to file: " << output_file_name << endl;
     output_text_file.close();
   }
 }

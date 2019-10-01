@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Grid* GameRules::generateNextGrid(Grid* g, string mode){
+Grid* GameRules::generateNextGrid(Grid* g, string mode, string outputMode){
   // Creates second grid of same size
   Grid* g2 = new Grid(g->length, g->height, 0);
   // declare variables
@@ -57,7 +57,10 @@ Grid* GameRules::generateNextGrid(Grid* g, string mode){
       }
     }
   }
-  g2->printGrid();
+  if(outputMode != "File")
+  {
+    g2->printGrid();
+  }
   return g2;
 }
 
