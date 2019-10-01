@@ -140,7 +140,9 @@ int Grid::getValue(int x, int y, string gameMode){
       cout << "slot has invalid char" << endl;
     }
   }
+  // This should never run --> here for safety
   else{
     cout << "whoops, mode incorrect" << endl;
+    exit(1);
   }
 }

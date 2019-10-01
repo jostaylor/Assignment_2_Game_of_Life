@@ -57,6 +57,7 @@ Grid* GameRules::generateNextGrid(Grid* g, string mode, string outputMode){
       }
     }
   }
+  // Ensures the grid does NOT print to the console when it is printing to an output file
   if(outputMode != "File")
   {
     g2->printGrid();
@@ -95,6 +96,5 @@ bool GameRules::compare(Grid* first, Grid* second)
 }
 
 GameRules::GameRules(){
-  x = 0;
-  y = 0;
+  // lmao nothing here
 }

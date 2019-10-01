@@ -16,7 +16,7 @@ public:
   string gameMode; // either Classic, Donut, or Mirror
   int length; // length of grid
   int height; // height of grid
-  double popDensity;
-  char** myGrid;
+  double popDensity; // population density of the grid
+  char** myGrid; // the actual grid object
 };
 #endif
