@@ -18,11 +18,6 @@ int main(int argc, char const *argv[])
   Grid* g = user_input();
   gameMode = user_input_2(g);
 
-  g->myGrid[2][3] = 'X';
-  g->myGrid[2][2] = 'X';
-  g->myGrid[2][1] = 'X';
-  g->myGrid[2][0] = 'X';
-  g->myGrid[1][0] = 'X';
   Grid* testGrid = new Grid(g->length, g->height, g->popDensity); // creates new grid on the heap
   Grid* compareGrid = new Grid(g->length, g->height, g->popDensity);// new grid to help with checking
   GameRules gr;
