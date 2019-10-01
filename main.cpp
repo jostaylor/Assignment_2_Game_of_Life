@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
   Grid* compareGrid = new Grid(g->length, g->height, g->popDensity);// new grid to help with checking
   GameRules gr;
   //use the grid created by the user
-  multipleGenerations(gr, g, testGrid, gameMode, compareGrid);\
+  multipleGenerations(gr, g, testGrid, gameMode, compareGrid);
 
   return 0;
 }
@@ -253,11 +253,12 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
   string user = g->outputMode;
   //bool to check if 2 grids are equal to one another
   bool areEqual = false;
-  //if the output mode is enter
+  // ------------------- Enter --------------------------
   if(user == "Enter")
   {
     //so that user can exit
     char end;
+    // prints initial generations to console
     cout << "0" << endl;
     g->printGrid();
     cout << "1" << endl;
@@ -270,6 +271,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     {
       //save initial grid
       compareGrid = g1;
+      // Print generation count and compute next generation
       cout << counter << endl;
       g1 = gr.generateNextGrid(g1, mode);
       //after at least 10 itterations, compare the previous grid to the current
@@ -285,8 +287,10 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       counter++;
     }
   }
+  // ------------------------ Pause -----------------------------
   else if(user == "Pause")
   {
+    // Prints initial grid and first generation to console
     cout << "0" << endl;
     g->printGrid();
     cout << "1" << endl;
@@ -298,6 +302,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     {
       //save original grid
       compareGrid = g1;
+      // Print and generate next grid
       cout << counter << endl;
       g1 = gr.generateNextGrid(g1, mode);
       if(counter > 10)
@@ -311,6 +316,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       usleep(750000);
     }
   }
+  // ------------------------ File -----------------------------------
   else if (user == "File")
   {
     //create string to store filename
@@ -321,7 +327,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
     ofstream output_text_file;
     //open file
     output_text_file.open(output_file_name);
-    //print original grid to file
+    //print original grid to file and console
     output_text_file << "0" << endl;
     cout << "0" << endl;
     g->printGrid();
@@ -333,6 +339,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       }
       output_text_file << "\n";
     }
+    // Print first generation to console and output fun
     output_text_file << "1" << endl;
     cout << "1" << endl;
     g1 = gr.generateNextGrid(g, mode);
@@ -344,10 +351,11 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       }
       output_text_file << "\n";
     }
+    // Sets counter to 2 accordingly and runs multiple generation loop
     int counter = 2;
     while(areEqual != true)
     {
-      //same thing as others but this time printing to grid instead of terminal
+      //same thing as others but this time printing to output file instead of terminal
       compareGrid = g1;
       output_text_file << counter << endl;
       cout << counter << endl;
