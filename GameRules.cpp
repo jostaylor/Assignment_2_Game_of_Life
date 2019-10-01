@@ -4,10 +4,9 @@
 
 using namespace std;
 
-Grid* GameRules::generateNextGrid(Grid* g, string s){
+Grid* GameRules::generateNextGrid(Grid* g, string mode){
   //get GameMode
-  string mode = s;
-  cout << "Mode is: " << s << endl;
+  cout << "Mode is: " << mode << endl;
   // Creates second grid of same size
   Grid* g2 = new Grid(g->length, g->height, 0);
   // g->myGrid[2][3] = 'X';
@@ -88,6 +87,30 @@ Grid* GameRules::generateNextGrid(Grid* g, string s){
 
   return g2;
 
+}
+
+bool GameRules::compare(Grid* first, Grid* second)
+{
+  int similarities = 0;
+  int total = first->length * first->height;
+  for(int i = 0; i < first->length; ++i)
+  {
+    for(int j = 0; j < first->height; ++j)
+    {
+      if(first->myGrid[i][j] == second->myGrid[i][j])
+      {
+        similarities++;
+      }
+    }
+  }
+  if(similarities == total)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 GameRules::GameRules(){

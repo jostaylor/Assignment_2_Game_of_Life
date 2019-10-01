@@ -10,6 +10,7 @@ public:
   Grid(int numRows, int numColumns, double populationDensity); // overload constructor
   ~Grid(); // destructor
   void printGrid();
+  void printGridToFile(string filename);
   int checkGrid();
   int getValue(int x, int y, string gameMode); // returns 0 if dash or 1 if X
 

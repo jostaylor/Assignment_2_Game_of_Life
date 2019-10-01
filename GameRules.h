@@ -12,6 +12,7 @@ public:
 
   int x;
   int y;
-  Grid* generateNextGrid(Grid* g, string s);
+  Grid* generateNextGrid(Grid* g, string mode);
+  bool compare(Grid* first, Grid* second);
 };
 #endif
