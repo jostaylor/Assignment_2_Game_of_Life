@@ -19,7 +19,8 @@ GameRules.cpp
 Grid.cpp
 Grid.h
 main.cpp
-
+README.md
+Makefile
 
 4. A LIST OF ALL REFERENCES USED TO COMPLETE THE ASSIGNMENT, INCLUDING PEERS (IF APPLICABLE)
 a. https://www.dynamicguru.com/tips/cpp-check-if-input-is-valid-data-type-using-cin-fail/
