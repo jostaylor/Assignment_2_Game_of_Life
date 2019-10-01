@@ -9,9 +9,7 @@ public:
   Grid(); // constructor
   Grid(int numRows, int numColumns, double populationDensity); // overload constructor
   ~Grid(); // destructor
-  void printGrid();
-  void printGridToFile(string filename);
-  int checkGrid();
+  void printGrid(); //prints grid to the screen
   int getValue(int x, int y, string gameMode); // returns 0 if dash or 1 if X
 
   string outputMode; // either Pause, Enter, or File

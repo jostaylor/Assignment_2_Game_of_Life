@@ -64,22 +64,6 @@ void Grid::printGrid(){
   }
 }
 
-// -------------- do we need this? -------------------
-int Grid::checkGrid()
-{
-  int isFilled = 0;
-  for(int i = 0; i < length; ++i)
-  {
-    for(int j = 0; j < height; ++j)
-    {
-      if(myGrid[i][j] == 'X')
-      {
-        isFilled +=1;
-      }
-    }
-  }
-  return isFilled;
-}
 // ---------------------^^^^^^--------------------------
 
 // returns 0 if dash and 1 if X

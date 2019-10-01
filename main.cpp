@@ -4,13 +4,11 @@
 #include <unistd.h>
 #include "Grid.h"
 #include "GameRules.h"
-// #include "Classic.h"
 
 using namespace std;
 
 Grid* user_input();
 string user_input_2(Grid* g1);
-// void clearScreen();
 void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s, Grid* compareGrid);
 
 int main(int argc, char const *argv[])
@@ -26,16 +24,10 @@ int main(int argc, char const *argv[])
   g->myGrid[2][0] = 'X';
   g->myGrid[1][0] = 'X';
   Grid* testGrid = new Grid(g->length, g->height, g->popDensity); // creates new grid on the heap
-  Grid* compareGrid = new Grid(g->length, g->height, g->popDensity);
-  //testGrid->printGrid();
-  //g->gameMode = "Donut"; // sets mode to donut
+  Grid* compareGrid = new Grid(g->length, g->height, g->popDensity);// new grid to help with checking
   GameRules gr;
   //use the grid created by the user
-  //system("pause");
-  multipleGenerations(gr, g, testGrid, gameMode, compareGrid);
-  // gr.generateNextGrid(g);
-  // clearScreen();
-  //gr.generateNextGrid(testGrid);
+  multipleGenerations(gr, g, testGrid, gameMode, compareGrid);\
 
   return 0;
 }
@@ -254,69 +246,84 @@ string user_input_2(Grid* g1){
   }
   return mode;
 }
-// ------------------ Clear screen method --------------------------------
-void static clearScreen()
-{
-  for(int i = 0; i < 10; ++i)
-  {
-    cout << "\n\n\n\n\n\n\n\n\n\n";
-  }
-  //add space between generations
-  cout << "----------" << endl;
-}
 // ------------------- Runs Multiple Generations --------------------------
 void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* compareGrid)
 {
+  //gets the output mode that the user has selected
   string user = g->outputMode;
+  //bool to check if 2 grids are equal to one another
   bool areEqual = false;
-
+  //if the output mode is enter
   if(user == "Enter")
   {
+    //so that user can exit
     char end;
+    //labels the first generation
     cout << "Generation 1" << endl;
+    //creates and prints the first generation
     g1 = gr.generateNextGrid(g, mode);
     //grab char so it runs within the loop properly
     cin.get(end);
+    //create counter at 2 to properly label generations
     int counter = 2;
     while(end != 'c' && areEqual != true)
     {
+      //save initial grid
       compareGrid = g1;
+      //label generation number
       cout << "Generation " << counter << endl;
+      //print and create new grid using the same pointer
       g1 = gr.generateNextGrid(g1, mode);
+      //after at least 10 itterations, compare the previous grid to the current
+      //grid to check if they are identical and the program should stop running
       if(counter > 10)
       {
         areEqual = gr.compare(compareGrid, g1);
       }
+      //lets user hit enter to see the next generation
       cout << "Press enter to continue....(c to exit) " << endl;
       cin.get(end);
+      //update counter
       counter++;
     }
   }
   else if(user == "Pause")
   {
+    //label generations
     cout << "Generation 1" << endl;
+    //print and create first generation
     g1 = gr.generateNextGrid(g, mode);
+    //set counter to 2 to label generations properly
     int counter = 2;
+    //let program run until the previous and current grid are equal
     while(areEqual != true)
     {
+      //save original grid
       compareGrid = g1;
+      //label generation
       cout << "Generation " << counter << endl;
+      //create and print new grid
       g1 = gr.generateNextGrid(g1, mode);
       if(counter > 10)
       {
+        //check if previous and current grid are identical
         areEqual = gr.compare(compareGrid, g1);
       }
+      //update counter
       counter++;
+      //delay program to allow user to see each generation
       usleep(750000);
-      //counter += 1;
     }
   }
   else if (user == "File")
   {
+    //create string to store filename
     string output_file_name = "";
+    //get filename from user
     cout << "Please input the name of the text file you'd like to output to (with file extension)." << endl;
     cin >> output_file_name;
     ofstream output_text_file;
+    //open file
     output_text_file.open(output_file_name);
     //print original grid to file
     g1 = gr.generateNextGrid(g, mode);
@@ -330,8 +337,10 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
       output_text_file << "\n";
     }
     int counter = 2;
-    while(counter < 2000 || areEqual != true)
+    //incase there is a "blinker" where the grids simply occilate then print only 2000 times
+    while(counter < 2000 && areEqual != true)
     {
+      //same thing as others but this time printing to grid instead of terminal
       compareGrid = g1;
       output_text_file << "Generation " << counter << endl;
       g1 = gr.generateNextGrid(g1, mode);
@@ -348,10 +357,8 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string mode, Grid* com
         areEqual = gr.compare(compareGrid, g1);
       }
       counter++;
-      //counter += 1;
     }
-
-    //output_text_file << "test text" << endl;
+    //close file
     output_text_file.close();
   }
 }
