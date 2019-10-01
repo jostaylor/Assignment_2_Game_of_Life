@@ -271,7 +271,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s)
   if(user == "Enter")
   {
     char end;
-    cout<< "Generation 1" << endl;
+    cout << "Generation 1" << endl;
     g1 = gr.generateNextGrid(g, s);
     //grab char so it runs within the loop properly
     cin.get(end);
@@ -289,7 +289,7 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s)
   {
     g1 = gr.generateNextGrid(g, s);
     int counter = 0;
-    while(true)//counter != 50)
+    while(true)
     {
       cout << "Generation " << counter << endl;
       g1 = gr.generateNextGrid(g1, s);
@@ -297,5 +297,16 @@ void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s)
       usleep(750000);
       //counter += 1;
     }
+  }
+  else if (user == "File")
+  {
+    string output_file_name = "";
+    cout << "Please input the name of the text file you'd like to output to (with file extension)." << endl;
+    cin >> output_file_name;
+    ofstream output_text_file;
+    output_text_file.open(output_file_name);
+    
+    output_text_file << "test text" << endl;
+    output_text_file.close();
   }
 }
