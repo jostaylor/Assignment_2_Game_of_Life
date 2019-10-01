@@ -1,5 +1,15 @@
-<<<<<<< HEAD
+# Assignment_2
+CPSC-350 - Assignment 2 - Game of Life
 
+Josh Taylor
+2317445
+jostaylor@chapman.edu
+CPSC 350-03
+&
+Titan Mitchell
+6969696
+eatmywut@69.com
+CPSC 35-which section
 
 Resources used:
 https://www.dynamicguru.com/tips/cpp-check-if-input-is-valid-data-type-using-cin-fail/
