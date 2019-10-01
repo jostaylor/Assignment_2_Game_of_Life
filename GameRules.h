@@ -12,6 +12,6 @@ public:
 
   int x;
   int y;
-  Grid* generateNextGrid(Grid* g);
+  Grid* generateNextGrid(Grid* g, string s);
 };
 #endif

@@ -84,7 +84,8 @@ int Grid::checkGrid()
 
 // returns 0 if dash and 1 if X
 // contatins conditionals for each MODE
-int Grid::getValue(int x, int y){
+int Grid::getValue(int x, int y, string gameMode){
+  //cout << "GameMode is: " << gameMode << endl;
   // -------------------------Classic Mode-------------------------------
   if (gameMode == "Classic"){
     if (x == -1 || x >= length || y == -1 || y >= height){ // if coordinate is outside grid
