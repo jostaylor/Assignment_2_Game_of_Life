@@ -6,7 +6,7 @@
 #include "GameRules.h"
 
 using namespace std;
-
+//methods
 Grid* user_input();
 string user_input_2(Grid* g1);
 void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s, Grid* compareGrid);
@@ -181,7 +181,7 @@ Grid* user_input(){
 }
 
 string user_input_2(Grid* g1){
-  // --------- User chooses mode ---------------
+  // --------- User chooses game mode ---------------
   string mode;
   int inputted_game_mode = 0;
   cout << "What game mode would like to run in?" << endl;
@@ -197,17 +197,15 @@ string user_input_2(Grid* g1){
     cin >> inputted_game_mode;
   }
   // correctly initializes variable
+  //sets mode to whatever game mode the user chooses
   if (inputted_game_mode == 1){
     mode = "Classic";
-    //g1->gameMode = "Classic";
   }
   else if (inputted_game_mode == 2){
     mode = "Donut";
-    //g1->gameMode = "Donut";
   }
   else if (inputted_game_mode == 3){
     mode = "Mirror";
-    //g1->gameMode = "Mirror";
   }
   else{
     cout << "Something went wrong. Please try again." << endl;
