@@ -9,15 +9,16 @@
 using namespace std;
 
 Grid* user_input();
-void user_input_2(Grid* g1);
+string user_input_2(Grid* g1);
 // void clearScreen();
-void multipleGenerations(GameRules gr, Grid* g, Grid* g1);
+void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s);
 
 int main(int argc, char const *argv[])
 {
+  string gameMode = "";
   // Runs initial user_input to create a grid before simulation and set mode variables
   Grid* g = user_input();
-  user_input_2(g);
+  gameMode = user_input_2(g);
 
   g->myGrid[2][3] = 'X';
   g->myGrid[2][2] = 'X';
@@ -29,8 +30,8 @@ int main(int argc, char const *argv[])
   //g->gameMode = "Donut"; // sets mode to donut
   GameRules gr;
   //use the grid created by the user
-  system("pause");
-  multipleGenerations(gr, g, testGrid);
+  //system("pause");
+  multipleGenerations(gr, g, testGrid, gameMode);
   // gr.generateNextGrid(g);
   // clearScreen();
   //gr.generateNextGrid(testGrid);
@@ -191,8 +192,9 @@ Grid* user_input(){
 
 }
 
-void user_input_2(Grid* g1){
+string user_input_2(Grid* g1){
   // --------- User chooses mode ---------------
+  string mode;
   int inputted_game_mode = 0;
   cout << "What game mode would like to run in?" << endl;
   cout << "(1) Classic mode\n(2) Donut Mode\n(3) Mirror Mode" << endl;
@@ -208,13 +210,16 @@ void user_input_2(Grid* g1){
   }
   // correctly initializes variable
   if (inputted_game_mode == 1){
-    g1->gameMode = "Classic";
+    mode = "Classic";
+    //g1->gameMode = "Classic";
   }
   else if (inputted_game_mode == 2){
-    g1->gameMode = "Donut";
+    mode = "Donut";
+    //g1->gameMode = "Donut";
   }
   else if (inputted_game_mode == 3){
-    g1->gameMode = "Mirror";
+    mode = "Mirror";
+    //g1->gameMode = "Mirror";
   }
   else{
     cout << "Something went wrong. Please try again." << endl;
@@ -246,6 +251,7 @@ void user_input_2(Grid* g1){
     cout << "Something went wrong. Please try again." << endl;
     exit(1);
   }
+  return mode;
 }
 // ------------------ Clear screen method --------------------------------
 void static clearScreen()
@@ -258,41 +264,38 @@ void static clearScreen()
   cout << "----------" << endl;
 }
 // ------------------- Runs Multiple Generations --------------------------
-void multipleGenerations(GameRules gr, Grid* g, Grid* g1)
+void multipleGenerations(GameRules gr, Grid* g, Grid* g1, string s)
 {
   string user = g->outputMode;
-  // while(user != "Pause" || user != "Enter" || user != "File")
-  // {
-  //   gr.generateNextGrid(g);
-  //   clearScreen();
-  // }
-  //Don't need an if statement for pause because the while loop will just stop running so it will be paused
-  //This is to do the "Enter" key.
+
   if(user == "Enter")
   {
     char end;
-    g1 = gr.generateNextGrid(g);
-    int counter = 0;
-    while(counter != 50)
+    cout<< "Generation 1" << endl;
+    g1 = gr.generateNextGrid(g, s);
+    //grab char so it runs within the loop properly
+    cin.get(end);
+    int counter = 2;
+    while(end != 'c')
     {
-      //system("pause");
-      g1 = gr.generateNextGrid(g1);
-      cout << "Press enter to continue.... " << endl;
+      cout << "Generation " << counter << endl;
+      g1 = gr.generateNextGrid(g1, s);
+      cout << "Press enter to continue....(c to exit) " << endl;
       cin.get(end);
-      counter += 1;
+      counter++;
     }
   }
   else if(user == "Pause")
   {
-    g1 = gr.generateNextGrid(g);
+    g1 = gr.generateNextGrid(g, s);
     int counter = 0;
     while(true)//counter != 50)
     {
-      //system("pause");
-      g1 = gr.generateNextGrid(g1);
+      cout << "Generation " << counter << endl;
+      g1 = gr.generateNextGrid(g1, s);
+      counter++;
       usleep(750000);
       //counter += 1;
     }
   }
-
 }

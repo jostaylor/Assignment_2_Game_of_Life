@@ -4,8 +4,10 @@
 
 using namespace std;
 
-Grid* GameRules::generateNextGrid(Grid* g){
-
+Grid* GameRules::generateNextGrid(Grid* g, string s){
+  //get GameMode
+  string mode = s;
+  cout << "Mode is: " << s << endl;
   // Creates second grid of same size
   Grid* g2 = new Grid(g->length, g->height, 0);
   // g->myGrid[2][3] = 'X';
@@ -27,14 +29,14 @@ Grid* GameRules::generateNextGrid(Grid* g){
       current_cell = g->myGrid[i][j];
       amount_of_neighbors = 0;
       // Checks every cell around [i][j]
-      amount_of_neighbors += g->getValue(i+1, j);
-      amount_of_neighbors += g->getValue(i+1, j+1);
-      amount_of_neighbors += g->getValue(i, j+1);
-      amount_of_neighbors += g->getValue(i-1, j+1);
-      amount_of_neighbors += g->getValue(i-1, j);
-      amount_of_neighbors += g->getValue(i-1, j-1);
-      amount_of_neighbors += g->getValue(i, j-1);
-      amount_of_neighbors += g->getValue(i+1, j-1);
+      amount_of_neighbors += g->getValue(i+1, j, mode);
+      amount_of_neighbors += g->getValue(i+1, j+1, mode);
+      amount_of_neighbors += g->getValue(i, j+1, mode);
+      amount_of_neighbors += g->getValue(i-1, j+1, mode);
+      amount_of_neighbors += g->getValue(i-1, j, mode);
+      amount_of_neighbors += g->getValue(i-1, j-1, mode);
+      amount_of_neighbors += g->getValue(i, j-1, mode);
+      amount_of_neighbors += g->getValue(i+1, j-1, mode);
       // Implements Game of Life Rules to determine the cell's state in next generation
 
       //cout << "Amount of neighbors: " << amount_of_neighbors << endl;
@@ -82,6 +84,7 @@ Grid* GameRules::generateNextGrid(Grid* g){
   //cout << y << endl;
   //cout << g->getValue(x, y) << endl;
   return g2;
+
 }
 
 GameRules::GameRules(){

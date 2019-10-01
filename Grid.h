@@ -11,7 +11,7 @@ public:
   ~Grid(); // destructor
   void printGrid();
   int checkGrid();
-  int getValue(int x, int y); // returns 0 if dash or 1 if X
+  int getValue(int x, int y, string gameMode); // returns 0 if dash or 1 if X
 
   string outputMode; // either Pause, Enter, or File
   string gameMode; // either Classic, Donut, or Mirror
